@@ -77,6 +77,7 @@ var dataVersionScopes = map[int][]parser.AgentType{
 	186:                         {parser.AgentAntigravity, parser.AgentAntigravityCLI},
 	187:                         {parser.AgentHermes, parser.AgentAugureDesktop},
 	188:                         {parser.AgentPi, parser.AgentOMP, parser.AgentOMO, parser.AgentStepCode, parser.AgentDirectAPI, parser.AgentPrimeAgent},
+	189:                         {}, // Retained tool calls are indexed on open.
 }
 
 // firstScopedDataVersion is the oldest version that may be declared. Released

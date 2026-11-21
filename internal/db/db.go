@@ -704,7 +704,8 @@ CREATE INDEX IF NOT EXISTS idx_provider_freshness_updated_at
 // (187: re-parse compacted Hermes state.db sessions to exclude archived/hidden
 // rows and preserve display_order without losing companion suppression.)
 // (188: split Pi /skill: expansions into a skill row and the typed prompt.)
-const dataVersion = 188
+// (189: include retained tool calls in pull request links.)
+const dataVersion = 189
 
 const archiveOnlyVersionBase = 1 << 20
 
@@ -5597,6 +5598,9 @@ func (db *DB) HasCJKFTS(ctx context.Context) (available bool) {
 func (db *DB) setDataVersion(ctx context.Context) error {
 	return db.Update(ctx, func(tx *sql.Tx) error {
 		if err := db.upgradePromptPRLinksTx(ctx, tx); err != nil {
+			return err
+		}
+		if err := db.upgradeToolPRLinksTx(ctx, tx); err != nil {
 			return err
 		}
 		return advanceDataVersion(ctx, tx, dataVersion)
