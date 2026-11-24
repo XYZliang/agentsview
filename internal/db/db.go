@@ -3076,7 +3076,7 @@ func schemaColumnMigrations() []schemaColumnMigration {
 		},
 		{
 			"tool_calls", "pr_links",
-			"ALTER TABLE tool_calls ADD COLUMN pr_links TEXT; ALTER TABLE tool_calls ADD COLUMN pr_context TEXT",
+			"ALTER TABLE tool_calls ADD COLUMN pr_links TEXT",
 		},
 		{
 			"worktree_project_mappings", "layout",
